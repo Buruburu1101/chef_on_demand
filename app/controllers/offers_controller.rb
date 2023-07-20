@@ -6,4 +6,8 @@ class OffersController < ApplicationController
   def show
     @offers = Offer.find(params[:id])
   end
+
+  def article_params
+    params.require(:offer).permit(:cuisine, :photo)
+  end
 end
