@@ -1,10 +1,12 @@
 class OffersController < ApplicationController
   def index
-    @offers = Offer.all
+    @offers = policy_scope(Offer)
   end
 
   def show
-    @offers = Offer.find(params[:id])
+    @offer = Offer.find(params[:id])
+    @booking = Booking.new
+    authorize @offer
   end
 
   def offer_params
