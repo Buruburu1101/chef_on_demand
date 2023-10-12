@@ -5,18 +5,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
-      <% if user_signed_in? %>
+      <% if user_signed_in? && current_user.user_type == "renter"%>
         <li class="nav-item dropdown dropstart">
           <%= image_tag "https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fGhlYWRzaG90fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { 'bs-toggle': "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu">
             <%= link_to "Home", root_path, class: "dropdown-item" %>
             <%= link_to "My Meals", bookings_path, class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
-            <% if current_user.user_type == "chef" %>
-              <p class="my-1 mt-2 dropdown-item border-top">Chef Links</p>
+      <% elsif user_signed_in? && current_user.user_type == "chef" %>
+        <li class="nav-item dropdown dropstart">
+          <%= image_tag "https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fGhlYWRzaG90fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { 'bs-toggle': "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu">
               <%= link_to "Make a New Offering", new_offer_path, class: "dropdown-item" %>
               <%= link_to "My Bookings", chefs_bookings_path, class: "dropdown-item" %>
-            <% end %>
+              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
           </div>
         </li>
       <% else %>
@@ -25,8 +27,6 @@
             <%= link_to "Login", new_user_session_path, class: "nav-link", style: "display: inline-block;" %>
             <%= link_to "Sign up", new_user_registration_path, class: "nav-link", style: "display: inline-block;" %>
           </li>
-
-        </li>
       </div>
       <% end %>
     </ul>

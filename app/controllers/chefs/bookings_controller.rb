@@ -23,5 +23,4 @@ class Chefs::BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:offer_id, :user_id, :service_date, :meals_quantity, :user_comment, :cook_at_home, :status)
   end
-
 end
